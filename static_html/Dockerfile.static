@@ -1,0 +1,23 @@
+# declare what image to use
+# FROM image_name:latest
+FROM python:latest
+
+WORKDIR /app
+# react static app
+
+# RUN mkdir -p /static_folder
+# COPY ./static_html /static_folder
+
+COPY ./src /app
+
+# RUN echo "hello" > index.html
+
+# docker build -f Dockerfile -t pyapp .
+# docker run -it pyapp
+
+# docker build -f Dockerfile -t paesas13/ai-py-app-test:latest .
+# docker push paesas13/ai-py-app-test:latest
+
+# python -m http.server 8000
+# docker run -it -p 3000:8000
+CMD ["python", "-m", "http.server", "8000"]

@@ -1,0 +1,29 @@
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - 8080:8000
+    command: uvicorn main:app --host 0.0.0.0 --port 8000 #--reload
+    volumes:
+      - ./backend/src:/app
+    develop:
+      watch:
+        - action: rebuild
+          path: backend/requirements.txt
+        - action: rebuild
+          path: backend/Dockerfile
+        - action: restart
+          path: backend/src 
+
+  static_html: # custom key name
+    build:
+      context: ./static_html/
+      dockerfile: Dockerfile.static
+    ports:
+      - 8000:8000
+      - 3000:8000
+    command: python -m http.server 8000
+    volumes:
+      - ./static_html/src:/app
