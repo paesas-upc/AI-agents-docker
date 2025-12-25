@@ -2,7 +2,13 @@
   "$schema": "https://railway.com/railway.schema.json",
   "build": {
     "builder": "DOCKERFILE",
-    "dockerfilePath": "backend/Dockerfile"
+    "dockerfilePath": "backend/Dockerfile",
+    "watchPatterns": [
+        "src/**",
+        "requirements.txt",
+        "railway.json",
+        "Dockerfile"
+        ]
     },
   "deploy": {
     "startCommand": "uvicorn main:app --host 0.0.0.0 --port 8000"
