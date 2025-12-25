@@ -5,17 +5,25 @@ services:
       dockerfile: Dockerfile
     ports:
       - 8080:8000
-    command: uvicorn main:app --host 0.0.0.0 --port 8000 #--reload
+    command: uvicorn main:app --host 0.0.0.0 --port 8000 # --reload
+    environment:
+      - PORT=8000
+      - MY_PROJECT=Hello world
+    env_file:
+      - .env.sample
     volumes:
       - ./backend/src:/app
     develop:
       watch:
         - action: rebuild
-          path: backend/requirements.txt
+          path: ./backend/requirements.txt
         - action: rebuild
-          path: backend/Dockerfile
+          path: ./backend/Dockerfile
+        - action: rebuild
+          path: ./backend/ignoreme/
         - action: restart
-          path: backend/src 
+          path: ./backend/src/
+          # target: app/
 
   static_html: # custom key name
     build:
