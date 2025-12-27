@@ -32,10 +32,10 @@ def chat_create_message(
     ):
     data = payload.model_dump() # pydantic -> dict
     print(data)
-    obj = EmailMessageSchema.model_validate(data)
+    obj = ChatMessage.model_validate(data)
     session.add(obj) 
     session.commit()
     # session.refresh(obj) # ensure id/primary key is added to the obj instance
     # ready to store in the db
     response = generate_email_message(payload.message)
-    return obj
+    return response
