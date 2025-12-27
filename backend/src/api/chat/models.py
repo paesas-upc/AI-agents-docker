@@ -7,6 +7,7 @@ class ChatMessagePayload(SQLModel):
     # serializer
     message: str
 
+# comment
 class ChatMessage(SQLModel, table=True): # type: ignore
     # database table
     # saving, updating, getting, deleting
